@@ -1,4 +1,7 @@
+
+
 const AddPropertyPage = () => {
+
     return <div>Add Property Page</div>;
 }
  
