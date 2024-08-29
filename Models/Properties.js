@@ -1,9 +1,11 @@
-import {mongoose, models, Schema} from "mongoose";
+import mongoose from "mongoose";
+import  {models,model, Schema} from "mongoose";
 
 
-const UserSchema = new Schema({
+
+const PropertySchema = new Schema({
     owner:{
-        type: Schema.type.ObjectId,
+        type: Schema.Types.ObjectId,
         ref:'User',
         required: true
     },
@@ -66,6 +68,7 @@ const UserSchema = new Schema({
     timestamps:true  //Mongoose automatically add createdAt and updatedAt fields to track when doc is created and updated
 })
 
-const User = models.Property || models('Property', PropertySchema)  //checks for an existing User model in the Mongoose cache and creates it if not found.
-
+const Property = models.Property || model('Property', PropertySchema)  //checks for an existing User model in the Mongoose cache and creates it if not found.
+//models.Property:  Property model already exist in the Mongoose model cache
+//model(,)  if Property model doesn't exist, this creates a new model using the provided schema.
 export default Property   // be careful. do not use exports which is invalid.

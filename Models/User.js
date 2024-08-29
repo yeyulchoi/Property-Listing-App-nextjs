@@ -1,4 +1,5 @@
-import {mongoose, models, Schema} from "mongoose";
+import mongoose from "mongoose";  //import entire mongoose module
+import  {models, model,Schema} from "mongoose"; //destructure schema
 
 
 const UserSchema = new Schema({
@@ -24,6 +25,6 @@ const UserSchema = new Schema({
     timestamps:true  //Mongoose automatically add createdAt and updatedAt fields to track when doc is created and updated
 })
 
-const User = models.User || models('User', UserSchema)  //checks for an existing User model in the Mongoose cache and creates it if not found.
+const User = models.User || model('User', UserSchema)  //checks for an existing User model in the Mongoose cache and creates it if not found.
 
 export default User   // be careful. do not use exports which is invalid.

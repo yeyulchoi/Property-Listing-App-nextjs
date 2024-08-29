@@ -1,9 +1,13 @@
 import properties from '@/properties.json'
 import PropertyCard from './PropertyCard'
 import Link from 'next/link'
+import connectDB from '@/config/database'
+import Property from '@/Models/Properties'
 
-const HomeProperties = () => {
-    const recentProperties = properties.slice(0,3)
+const HomeProperties = async () => {
+    await connectDB();
+    const recentProperties =await Property.find({}).sort({createdAt:-1}).limit(3).lean() 
+    // const recentProperties = properties.slice(0,3)-- used to be used when using json file
 
     return ( 
         <>
