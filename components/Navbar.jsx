@@ -11,14 +11,22 @@ import {signIn, signOut, useSession, getProviders} from 'next-auth/react'
 
 const Navbar = () => {
   const { data: session} = useSession();
+  const profileImage =session?.user?.image;
 
 
     const [isMobileMenuOpen, setIsMobileMenuOpen]= useState(false)
     const [isProfileMenuOpen, setIsProfileMenuOpen]= useState(false)
-    const [isLoggedIn, setIsLoggedIn]= useState(false)
+    const [providers, setProviders] =useState(null)
 
     const pathname = usePathname()
 
+    useEffect(()=>{
+      const setAuthProviders = async() =>{
+        const res = await getProviders();
+        setProviders(res);
+      }
+      setAuthProviders()
+    },[])
     return (
       <nav className="bg-blue-700 border-b border-blue-500">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -97,12 +105,16 @@ const Navbar = () => {
           {!session && (
           <div className="hidden md:block md:ml-6">
             <div className="flex items-center">
-              <button
+              {providers && Object.values(providers).map((provider, index)=>(
+                <button key={index}
+                  onClick={()=>signIn(provider.id)}
                 className="flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
-              >
+                >
                 <FaGoogle className='text-white mr-2' />
                 <span>Login or Register</span>
-              </button>
+                </button>
+              ))}
+              
             </div>
           </div>
           )}
@@ -155,7 +167,9 @@ const Navbar = () => {
                   <span className="sr-only">Open user menu</span>
                   <Image
                     className="h-8 w-8 rounded-full"
-                    src={profileDefault}
+                    src={profileImage || profileDefault}
+                    width={40}
+                    height={400}
                     alt=""
                    
                   />
@@ -193,6 +207,10 @@ const Navbar = () => {
                   role="menuitem"
                   tabIndex="-1"
                   id="user-menu-item-2"
+                  onClick ={()=>{
+                    setIsProfileMenuOpen(false);
+                    signOut();
+                  }}
                 >
                   Sign Out
                 </button>

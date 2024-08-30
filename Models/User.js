@@ -14,12 +14,12 @@ const UserSchema = new Schema({
     },
     image:{
        
-        required:[true, 'Email is required.']
+       type:String
     },
-    bookmarks:{
+    bookmarks:[{
         type:Schema.Types.ObjectId,
         ref:'Property'       
-    }
+    }]
 },
 {
     timestamps:true  //Mongoose automatically add createdAt and updatedAt fields to track when doc is created and updated
