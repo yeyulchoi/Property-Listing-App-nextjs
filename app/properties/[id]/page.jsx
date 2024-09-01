@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { convertToSerializableObject } from "@/utils/convertToObject";
 
 
+
 //If your page is in a file located at pages/properties/[id].js or app/properties/[id]/page.js
 //Next.js automatically passes params to the component or function responsible for rendering the page.
 
@@ -57,6 +58,7 @@ const PropertyPage = async ({params}) => {
                 <div className="grid grid-cols-1 md:grid-cols-70/30 w-full gap-6">
 
                <PropertyDetails  property={property}/>
+              
                 </div>
             </div>
         </section>
