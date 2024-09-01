@@ -10,7 +10,8 @@ import cloudinary from "@/config/cloudinary";
    
 
 
- //formData: teh result of a form submission/// new  FormData() dont have to use it in nextjs' server action. When a form submission is handled on the server, formData object is automatically availabel
+ //formData: teh result of a form submission/// new  FormData() dont have to use it in nextjs' server action.
+ // When a form submission is handled on the server, formData object is automatically available.
 async function addProperty(formData){       // Pass the addProperty function to form id attribute, the function is called, formData is automade
     
     await connectDB();

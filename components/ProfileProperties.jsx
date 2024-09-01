@@ -4,22 +4,26 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import deleteProperty from "@/app/actions/deleteProperty";
-
+import { toast } from "react-toastify";
+//the term "actions" can refer to server-side functions that handle specific tasks, 
+//often in response to user interactions, such as form submissions, API requests,
+// or other events.
 
 const ProfileProperties = ({properties : initialProperties}) => {
     const [properties, setProperties]=useState(initialProperties)
     
     const handleDeleteProperty = async(propertyId)=>{
         const confirmed=window.confirm('Are you sure you want to delete this property')
-
         
-    if(!confirmed) return;
+        if(!confirmed) return;
 
-    await deleteProperty(propertyId)
+        await deleteProperty(propertyId)
 
-    const updatedProperties = properties.filter((property)=>property._id !==propertyId)
+        const updatedProperties = properties.filter((property)=>property._id !==propertyId)
 
-    setProperties(updatedProperties)
+        setProperties(updatedProperties)
+
+        toast.success('Property Deleted Successfully')
     }
 
     
@@ -40,7 +44,7 @@ const ProfileProperties = ({properties : initialProperties}) => {
             </div>
             <div className="mt-2">
                 <Link
-                href="/add-property.html"
+                href={`/properties/${property._id}/edit`}
                 className="bg-blue-500 text-white px-3 py-3 rounded-md mr-2 hover:bg-blue-600"
                 >
                 Edit

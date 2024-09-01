@@ -11,6 +11,10 @@ import { revalidatePath } from "next/cache"
 //when you need to perform additional logic or have multiple statements, 
 //and remember to use return to return the JSX.
 
+//The actions directory typically contains functions that handle various data-related
+// operations that are executed on the server.
+// Actions are generally used to perform operations that modify data or state on
+// the server. This includes operations like creating, updating, or deleting database records.
 
 async function deleteProperty(propertyId) {
 
@@ -40,7 +44,7 @@ async function deleteProperty(propertyId) {
     //delete images from Cloudinary
     if(publicIds.length >0){
         for(let publicId of publicIds){
-            await cloudinary.uploader.destroy('propertypulse/'+publicId)
+            await cloudinary.uploader.destroy('propertyShow/'+publicId)
         }
     }
     await property.deleteOne()

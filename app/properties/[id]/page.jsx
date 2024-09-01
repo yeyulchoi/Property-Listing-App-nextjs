@@ -8,12 +8,26 @@ import Link from 'next/link'
 import { convertToSerializableObject } from "@/utils/convertToObject";
 
 
+//If your page is in a file located at pages/properties/[id].js or app/properties/[id]/page.js
+//Next.js automatically passes params to the component or function responsible for rendering the page.
 
-
-
+                   //params here is one of the props. so it is inside {}, params is built-in term
+                   // containing the dynamic parts of the URL used by nextjs.therefore params.id.
+                   //but can rename it like params:property
 const PropertyPage = async ({params}) => {
     await connectDB();
-    const propertyDoc= await Property.findById(params.id).lean();
+    const propertyDoc= await Property.findById(params.id).lean();  //because the folder above the page is set to be [id], the
+                                                                // for object is like { id:'123'}. If it were to be [propertyId]
+                                                                //then it would be like { propertyId:'123'}, result in params.id
+    
+    // lean():The lean() method in Mongoose is used to optimize the query performance 
+    //by returning plain JavaScript objects instead of Mongoose documents.
+    //These objects don't have any of the methods or metadata that come with Mongoose documents. 
+    //It essentially strips down the document to a simple object, which is faster and more lightweight.
+    
+    //code for serializableobject below is necessary when working with data fetched from MongoDB (or other databases) 
+    //that you want to pass to a React component(ui, client side) in a Next.js app.
+    
     const property  = convertToSerializableObject(propertyDoc);
 
     if(!property){
