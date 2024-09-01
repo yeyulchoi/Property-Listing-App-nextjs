@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions} from "@/utils/authOptions"
 
 
-const getSessionUser = async() => {
+export const getSessionUser = async() => {
   
     const session = await getServerSession(authOptions);
      //used  to retrieve the current session on the server side.
@@ -30,7 +30,7 @@ const getSessionUser = async() => {
   
 
  
-export default getSessionUser;
+// export default getSessionUser;
 // regarding  Named export vs. default export:
 // if you want to import in the form of {getSessionUser}, then  export {getSessionUser} should be written here.
 

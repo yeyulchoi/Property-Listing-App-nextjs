@@ -2,7 +2,7 @@ import connectDB from '@/config/database';
 import Property from '@/Models/Properties';
 import Link from "next/link";
 import Image from "next/image";
-import getSessionUser from '@/utils/getSessionUser'
+import {getSessionUser} from '@/utils/getSessionUser'
 import profileDefault from '@/assets/images/profile.png'
 import ProfileProperties from '@/components/ProfileProperties';
 import { convertToSerializableObject } from '@/utils/convertToObject';
