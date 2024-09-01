@@ -41,7 +41,7 @@ export const authOptions = {
         }
         // 4. return true to allow sign in
         return true;
-    },
+      },
     // session  callback function that modifies the session object
     async session({session}){  //This line queries the database to find a user record that matches the email address associated with the current session.
         //1. get user from db
