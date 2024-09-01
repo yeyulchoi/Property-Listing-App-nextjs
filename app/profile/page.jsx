@@ -1,10 +1,11 @@
 import connectDB from '@/config/database';
-import User from "@/Models/User";
 import Property from '@/Models/Properties';
 import Link from "next/link";
 import Image from "next/image";
-import  getSessionUser from '@/utils/getSessionUser'
+import getSessionUser from '@/utils/getSessionUser'
 import profileDefault from '@/assets/images/profile.png'
+import ProfileProperties from '@/components/ProfileProperties';
+import { convertToSerializableObject } from '@/utils/convertToObject';
 
 
 
@@ -19,10 +20,14 @@ const ProfilePage = async () => {
     if(!userId){
         throw new Error('User Id is required')
     }
+
+    const propertiesDocs =await Property.find({owner: userId}).lean();
+    const properties=propertiesDocs.map(convertToSerializableObject)
+  
     
 
     return (
-        <section className="bg-blue-50">
+    <section className="bg-blue-50">
       <div className="container m-auto py-24">
         <div
           className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0"
@@ -50,66 +55,15 @@ const ProfilePage = async () => {
 
             <div className="md:w-3/4 md:pl-4">
               <h2 className="text-xl font-semibold mb-4">Your Listings</h2>
-              <div className="mb-10">
-                <Link  href="/property.html">
-                  <img
-                    className="h-32 w-full rounded-md object-cover"
-                    src="/images/properties/a1.jpg"
-                    alt="Property 1"
-                  />
-                </Link >
-                <div className="mt-2">
-                  <p className="text-lg font-semibold">Property Title 1</p>
-                  <p className="text-gray-600">Address: 123 Main St</p>
-                </div>
-                <div className="mt-2">
-                  <Link 
-                    href="/properties/add"
-                    className="bg-blue-500 text-white px-3 py-3 rounded-md mr-2 hover:bg-blue-600"
-                  >
-                    Edit
-                  </Link >
-                  <button
-                    className="bg-red-500 text-white px-3 py-2 rounded-md hover:bg-red-600"
-                    type="button"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-              <div className="mb-10">
-                <Link  href="/properties">
-                  <img
-                    className="h-32 w-full rounded-md object-cover"
-                    src="/images/properties/b1.jpg"
-                    alt="Property 2"
-                  />
-                </Link >
-                <div className="mt-2">
-                  <p className="text-lg font-semibold">Property Title 2</p>
-                  <p className="text-gray-600">Address: 456 Elm St</p>
-                </div>
-                <div className="mt-2">
-                  <Link 
-                    href="properties/add"
-                    className="bg-blue-500 text-white px-3 py-3 rounded-md mr-2 hover:bg-blue-600"
-                  >
-                    Edit
-                  </Link >
-                  <button
-                    className="bg-red-500 text-white px-3 py-2 rounded-md hover:bg-red-600"
-                    type="button"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
+                <ProfileProperties properties ={properties}/>
+            </div>
+            
             </div>
           </div>
         </div>
-      </div>
+      
     </section>
-    );
+    )
 }
  
 export default ProfilePage;
