@@ -6,8 +6,9 @@ import Property from "@/Models/Properties";
 import {FaArrowLeft} from 'react-icons/fa'
 import Link from 'next/link'
 import { convertToSerializableObject } from "@/utils/convertToObject";
-
-
+import BookmarkButton from "@/components/BookmarkButton";
+import ShareButtons from "@/components/ShareButton";
+import PropertyContactForm from "@/components/PropertyContactForm";
 
 //If your page is in a file located at pages/properties/[id].js or app/properties/[id]/page.js
 //Next.js automatically passes params to the component or function responsible for rendering the page.
@@ -40,7 +41,7 @@ const PropertyPage = async ({params}) => {
     return(
         <>
         
-        <PropertyHeaderImage image={property.images[0]} />
+        <PropertyHeaderImage image={property.images[0] } />
 
         <section>
             <div className="container m-auto py-6 px-6">
@@ -57,7 +58,12 @@ const PropertyPage = async ({params}) => {
             <div className="container m-auto py-10 px-6">
                 <div className="grid grid-cols-1 md:grid-cols-70/30 w-full gap-6">
 
-               <PropertyDetails  property={property}/>
+                    <PropertyDetails  property={property}/>
+                    <aside className="space-y-4">
+                        <BookmarkButton property={property}/>
+                        <ShareButtons property={property}/>
+                        <PropertyContactForm property={property}/>
+                    </aside>
               
                 </div>
             </div>
