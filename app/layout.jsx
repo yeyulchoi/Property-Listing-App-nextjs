@@ -24,6 +24,7 @@ const MainLayout = ({children}) => {
             <html>
                 <body>
                     <Navbar/>
+                    
                     <main>{children}</main>
                     <Footer/>
                     <ToastContainer />
