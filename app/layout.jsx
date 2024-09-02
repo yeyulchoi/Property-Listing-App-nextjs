@@ -23,8 +23,7 @@ const MainLayout = ({children}) => {
         <AuthProvider>
             <html>
                 <body>
-                    <Navbar/>
-                    
+                    <Navbar/>                    
                     <main>{children}</main>
                     <Footer/>
                     <ToastContainer />
