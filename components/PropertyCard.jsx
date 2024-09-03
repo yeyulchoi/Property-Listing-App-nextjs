@@ -19,16 +19,16 @@ const PropertyCard = ({property}) => {
     return ( 
 <div className="bg-white rounded-xl shadow-md relative">  {/* Image is looking into the public folder */}
 {/* when using Image: must have to add width/height/sizes */}
-        <Image
+          <Link href={`/properties/${property._id}`}>    
+            <Image
               src={property.images[0]}
               alt=""
               className="w-full h-auto rounded-t-xl"
               width={200}
               height={400}      // I modified width and height here . originally it was '0' for both
-              sizes='100vw'     
-             
+              sizes='100vw'       
             />
-    
+            </Link>  
             
             <div className="p-4">
               <div className="text-left md:text-center lg:text-left mb-6">

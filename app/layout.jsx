@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '@/assets/styles/globals.css'   // include global css into the layout
 import { GlobalProvider } from '@/context/globalContext';
-
+import 'photoswipe/dist/photoswipe.css'
 
 
 
